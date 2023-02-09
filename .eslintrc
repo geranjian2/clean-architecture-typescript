@@ -1,0 +1,19 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": "standard-with-typescript",
+    "overrides": [
+    ],
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
+    "rules": {
+        "trailing-comma": 0,
+        "prefer-for-of": 0,
+        "no-console": 0,
+        "triple-equals": 0,
+        "semi": 2
+    }
+}
