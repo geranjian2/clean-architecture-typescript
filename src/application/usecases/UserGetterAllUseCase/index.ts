@@ -3,7 +3,7 @@ import { type User } from '../../../domain/entities/User'
 import { type UserRepository } from '../../../domain/repositories/UserRepository'
 // import { type Notifier } from '../../domain/repositories/Notifier'
 
-export class UserGetterUseCase {
+export class UserGetterAllUseCase {
   private readonly _userRepository: UserRepository
   // private readonly _notifier: Notifier
 
@@ -12,13 +12,8 @@ export class UserGetterUseCase {
     // this._notifier = notifier
   }
 
-  async run (email: string): Promise<User | undefined> {
-    const user = await this._userRepository.getById(email)
-
-    // this._notifier.notify({
-    //   name: user.name,
-    //   age: user.age
-    // })
+  async run (email: string): Promise<User[]> {
+    const user = await this._userRepository.getAll()
     return user
   }
 }

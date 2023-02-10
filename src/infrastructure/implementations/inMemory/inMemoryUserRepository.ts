@@ -3,7 +3,7 @@ import { type User } from '@app/domain/entities/User'
 import { type UserRepository } from '../../../domain/repositories/UserRepository'
 
 export class InMemoryUserRepository implements UserRepository {
-  readonly userData: User[] = []
+  userData: User[] = []
   async getAll (): Promise<User[]> {
     return this.userData
   }
@@ -13,16 +13,25 @@ export class InMemoryUserRepository implements UserRepository {
     return user
   }
 
-  async getById (userId: string): Promise<User | null> {
-    let user!: User
-    return user
+  async getById (userId: string): Promise<User | undefined> {
+    return this.userData.find(x => x.id === userId)
   }
 
   async delete (userId: string): Promise<string> {
-    return 'usuario eliminado'
+    const arr = this.userData.filter(item => item.id !== userId)
+    this.userData = arr
+    return 'remove'
   }
 
   async update (user: User): Promise<User> {
+    this.userData.map(e => {
+      if (e.id === user.id) {
+        e.name = user.name
+        e.age = user.age
+        e.username = user.username
+      }
+      return e
+    })
     return user
   }
 }

@@ -1,0 +1,1 @@
+servicio de dominio es esa logica pequeña que se repite en los diferentes casos de uso

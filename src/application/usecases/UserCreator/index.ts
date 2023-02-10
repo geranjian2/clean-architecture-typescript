@@ -12,10 +12,10 @@ export class UserCreator {
     // this._notifier = notifier
   }
 
-  async run ({ id, name, age }: { id: string, name: string, age: number }): Promise<User> {
-    const user = new User({ id, name, age })
+  async run ({ id, name, age, username }: { id: string, name: string, age: number, username: string }): Promise<User> {
+    const user = new User({ id, name, age, username })
 
-    if (user.age < 18) { throw new MinorUserException() }
+    // if (user.age < 18) { throw new MinorUserException() }
 
     await this._userRepository.save(user)
 
