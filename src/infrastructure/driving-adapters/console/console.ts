@@ -4,12 +4,16 @@ import { UserGetterAllUseCase } from '@app/application/usecases/UserGetterAllUse
 import { UserGetterUseCase } from '@app/application/usecases/UserGetterUseCase'
 import { UserUpdaterUseCase } from '@app/application/usecases/UserUpdate'
 import { type User } from '@app/domain/entities/User'
+import { DynamoDBUserRepository } from '@app/infrastructure/implementations/Aws/dynamo-db/DynamoDBuserRepository'
 import { InMemoryUserRepository } from '@app/infrastructure/implementations/inMemory/inMemoryUserRepository'
-
+import * as dotenv from "dotenv";
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 (async () => {
-  const userMemoryRepository = new InMemoryUserRepository()
-  console.log(userMemoryRepository.userData)
+  dotenv.config();
+  console.log(process.env.AWS_ACCESS_KEY_ID);
+  // const userMemoryRepository = new InMemoryUserRepository()
+  const userMemoryRepository = new DynamoDBUserRepository()
+  // console.log(userMemoryRepository.userData)
   const userCreatorUseCase = new UserCreator(userMemoryRepository)
   const userTocreate: User = {
     name: 'Luciana',
@@ -23,7 +27,7 @@ import { InMemoryUserRepository } from '@app/infrastructure/implementations/inMe
 
   const userGetterAllUseCase = new UserGetterAllUseCase(userMemoryRepository)
   const users = await userGetterAllUseCase.run('geranjian@gmail.com')
-  console.log(userMemoryRepository.userData)
+  // console.log(userMemoryRepository.userData)
   console.log(users)
   console.log(user)
 
@@ -37,8 +41,8 @@ import { InMemoryUserRepository } from '@app/infrastructure/implementations/inMe
   const userU = await userUpdateUseCase.run(userUpdate)
   console.log('update', userU)
 
-  const userDeleteUseCase = new UserDeleteUseCase(userMemoryRepository)
-  await userDeleteUseCase.run(userUpdate)
+  // const userDeleteUseCase = new UserDeleteUseCase(userMemoryRepository)
+  // await userDeleteUseCase.run(userUpdate)
 
   const usersv = await userGetterAllUseCase.run('geranjian@gmail.com')
   console.log(usersv)

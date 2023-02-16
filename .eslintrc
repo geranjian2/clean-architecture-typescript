@@ -7,7 +7,8 @@
     "overrides": [
     ],
     "parserOptions": {
-        "project": "./tsconfig.json"
+        "project": "./tsconfig.json",
+        "ecmaVersion": 2022
     },
     "rules": {
         "trailing-comma": 0,
@@ -15,5 +16,6 @@
         "no-console": 0,
         "triple-equals": 0,
         "semi": 2
-    }
+    },
+    "parser": "babel-eslint"
 }
